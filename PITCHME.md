@@ -20,7 +20,7 @@ A tracing and troubleshooting tool for PHP scripts.
 
 ---
 
-### Install and verify install succ
+#### Install and verify install succ
 
 - Git repo: https://github.com/Qihoo360/phptrace
   - Install it from source or with package manager (Centos: remi repo yum install php-pecl-trace)
@@ -35,7 +35,7 @@ phptrace -p $!
 
 ---
 
-### Usage - trace PHP runtime
+#### Usage - trace PHP runtime
 
 - Login to qa.liwenbianji.cn and attach to docker container.
 ```
@@ -54,7 +54,7 @@ phptrace -p all -f type=function,content=mail
 
 ---
 
-### Usage - print PHP stack while process block.
+#### Usage - print PHP stack while process block.
 
 - Login to qa.author-path.com and open another CLI attached to docker.
 ```
@@ -65,7 +65,7 @@ php example.php
 phptrace status -p <process number>
 
 ```
-**Note**: the timeout for php status is 2 seconds, if it have not found any php logic, it will timeout and exit with error.
+- Note: the timeout for php status is 2 seconds, if it have not found any php logic, it will timeout and exit with error.
 
 ---
 
