@@ -16,7 +16,7 @@ A tracing and troubleshooting tool for PHP scripts.
 
 - phptrace is an open source tool developed by Qihoo 360 team.
 - Can track PHP executing process.
-- Can print PHP stack, can debug loop issue.
+- Can print PHP stack and debug loop issue.
 
 ---
 
@@ -25,10 +25,10 @@ A tracing and troubleshooting tool for PHP scripts.
 - Git repo: https://github.com/Qihoo360/phptrace
   - Install it from source or with package manager (Centos: remi repo yum install php-pecl-trace)
   - Enable the module from php.ini 
-- We provide the tool within Projecx container.
+- We provide it within Projecx docker container.
 
 ```
-#Verify it installed succ:
+#Verify installed succ:
 php -r 'for ($i = 0; $i < 20; $i++) usleep(500000);' &     
 phptrace -p $!                                            
 ```
@@ -37,40 +37,40 @@ phptrace -p $!
 
 ### Usage - trace PHP runtime
 
-- Login to qa.liwenbianji.cn and get into docker container.
+- Login to qa.liwenbianji.cn and attach to docker container.
+```
+docker exec -it projectx-ops-422-20180622_152400 /bin/bash
+```
 - Demo
 
 ```
-php -r 'for ($i = 0; $i < 20; $i++) usleep(500000);' &     # We start a PHP run in background. usleep is a function to simulate a block in PHP, so we can see it run:
-phptrace -p $!                                             # $! means that process id, we need to trace that special progress id. this can be found with linux command 'top'
-phptrace -p all -f type=function,content=mail              # Trace all mail related function call on all php-fpm process
+# Below we start a PHP process in background. usleep is a function to simulate a block in PHP, so we can see the run progress:
+php -r 'for ($i = 0; $i < 20; $i++) usleep(500000);' & 
+# Below we run phptrace to the above php, $! means that process id, for other php run, we can find php running progress with linux command 'top'
+phptrace -p $! 
+# Below we trace all mail related function call on all php-fpm process, then access a mail related page, it will output any function have 'mail' keywords.
+phptrace -p all -f type=function,content=mail  
 ```
 
 ---
 
 ### Usage - print PHP stack while process block.
 
-1. Login to qa.author-path.com
-2. Open two CLI.
-3. On CLI one run: 
+- Login to qa.author-path.com and open another CLI attached to docker.
 ```
-php example.php                        #example.php: https://raw.githubusercontent.com/Qihoo360/phptrace/master/example.php
-```
-4. On CLI two, find the PID of above progres, it also display the process id already.
-```
-ps -ef | grep example
-```
-5. On CLI two, run phptrace and at the sametime switch to CLI one and press enter to let the PHP run:
-```
-On CLI two: phptrace status -p <process number>
-On CLI one: press enter
+# Below we run a example.php: https://raw.githubusercontent.com/Qihoo360/phptrace/master/example.php
+php example.php  
+# It will display the PID of the progress, but usually we need to find the PID of above progres with linux command top.
+# On the other CLI, run below command and immedately switch to php example.php CLI and press enter to continue the progress run.
+phptrace status -p <process number>
 
-**Note**: the timeout for php status is 2 seconds, it assume it can attach any php runtime within 2 seconds. if not - it will exist with timeout.
+```
+**Note**: the timeout for php status is 2 seconds, if it have not found any php logic, it will timeout and exit with error.
 
 ---
 
-### Usage - track and filter function
+### Questions & Answer
 
-- Login to qa.liwenbianji.cn
-- Demo switch to 
+- Q/A
+- Suggestions.
 
