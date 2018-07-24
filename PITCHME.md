@@ -56,7 +56,8 @@ phptrace -p all -f type=function,content=mail
 
 #### Usage - print PHP stack while process block.
 
-- Login to qa.author-path.com and open another CLI attached to docker.
+- Login to qa.liwenbianji.cn and open another CLI attached to container.
+
 ```
 # Below we run a example.php: https://raw.githubusercontent.com/Qihoo360/phptrace/master/example.php
 php example.php  
