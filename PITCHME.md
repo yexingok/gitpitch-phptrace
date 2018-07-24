@@ -28,7 +28,7 @@ A tracing and troubleshooting tool for PHP scripts.
 - We provide it within Projecx docker container.
 
 ```
-#Verify installed succ:
+# Verify installed succ:
 php -r 'for ($i = 0; $i < 20; $i++) usleep(500000);' &     
 phptrace -p $!                                            
 ```
@@ -54,7 +54,7 @@ phptrace -p all -f type=function,content=mail
 
 ---
 
-#### Usage - print PHP stack while process block.
+#### Usage - print PHP stack info
 
 - Login to qa.liwenbianji.cn and open another CLI attached to container.
 
